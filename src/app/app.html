@@ -1,0 +1,16 @@
+<app-header [lists]='lists' (newListUpdated)='handleListsUpdated($event)' (selectedList)='
+  handleSelectedList($event)'></app-header>
+<main>
+  <app-list [title]='"Selecione uma Lista"' [lists]='lists' (selectedList)='handleSelectedList($event)'
+    (listsUpdated)='handleListsUpdated($event)'></app-list>
+  <!-- <app-list [title]=''Selecione o Status'' [options]='statuses' (optionSelected)='onStatusSelected($event)'></app-list> -->
+
+  <app-item-list [listSelected]='lists[selectedListIndex].value' [items]='lists[selectedListIndex].items'
+    (itemCompleted)='toggleItemCompletionInList(lists[selectedListIndex].value, $event)'
+    (itemRemoved)='onItemRemoved(lists[selectedListIndex].value, $event)'></app-item-list>
+  <app-add-item [listSelected]='lists[selectedListIndex].value'
+                (itemAdded)='addOrUpdateItemInList(lists[selectedListIndex].value, $event)'></app-add-item>
+</main>
+<footer>
+  <app-item-counter [itemsForCounter]='lists[selectedListIndex].items'></app-item-counter>
+</footer>

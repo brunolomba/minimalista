@@ -1,0 +1,13 @@
+<header class='flex flex-col justify-between bg-black text-white'>
+    <div class='flex border-b border-b-gray-600'>
+        <h1 class='grow inline p-4 text-xl'>
+            Minima<span class='font-bold'>LISTA</span>
+        </h1>
+        <button (click)='toggleInputAddList()'
+            class='px-1 text-4xl text-white cursor-pointer hover:bg-gray-800'>﹢</button>
+    </div>
+    <input id='addList' type="text" placeholder='Adicione uma nova lista' (keyup.enter)='addList()' [(ngModel)]='name'
+        class='{{ isOpen
+        ? "grow p-4 placeholder:text-gray-400 placeholder:text-sm outline-0" : "hidden" }}'>
+
+</header>

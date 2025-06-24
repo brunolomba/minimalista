@@ -1,0 +1,21 @@
+<section
+    class="flex border border-transparent border-b border-b-gray-300 focus-within:border focus-within:border-gray-300 bg-gray-100">
+    <div class='grow placeholder:text-gray-400 outline-0 overflow-hidden'>
+        <button (click)=" toggleDropdown()"
+            class="w-full flex justify-between items-center p-4 focus:outline-none transition-colors duration-200 text-lg font-semibold cursor-pointer">
+            <span>{{ selectedOptionLabel || title }}</span>
+            <span class="text-sm transform transition-transform duration-300" [class.rotate-180]="isOpen">
+                &#9660; </span>
+        </button>
+        <div *ngIf="isOpen" class="dropdown-content bg-white border-t border-gray-200">
+            <ul class="list-none p-0 m-0">
+                <li *ngFor="let list of lists" (click)="selectOption(list)"
+                    class="flex cursor-pointer border-b border-gray-200 hover:bg-gray-100 last:border-b-0 text-base">
+                    <span class='grow p-4'>{{ list.label }}</span>
+                    <button (click)='removeList(list.value)'
+                        class=' px-4 text-red-400 font-bold cursor-pointer hover:bg-red-100'>✕</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

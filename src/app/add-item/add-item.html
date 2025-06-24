@@ -1,0 +1,8 @@
+<section *ngIf='listSelected else noSelectedList'
+    class='flex border border-transparent border-b border-b-gray-300 focus-within:border focus-within:border-gray-300'>
+    <input id='addItem' type="text" placeholder='Adicione uma nova tarefa' [(ngModel)]='newItemDescription'
+        (keyup.enter)='addItem()' class='grow p-4 placeholder:text-gray-400 placeholder:text-sm outline-0'>
+    <button (click)='addItem()' class='px-1 text-4xl text-black cursor-pointer hover:bg-gray-100'>﹢</button>
+</section>
+<ng-template #noSelectedList>
+</ng-template>
