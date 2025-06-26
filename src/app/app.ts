@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importe CommonModule para *ngIf, *ngFor
-import { FormsModule } from '@angular/forms'; // Importe FormsModule para [(ngModel)]
-import { Item, List } from './models/item.model'; // Importa a interface
-import { v4 as uuidv4 } from 'uuid'; // Para gerar IDs únicos (instalar se não tiver)
-import { Header } from './header/header';
-import { AddItem } from './add-item/add-item';
-import { ItemList } from './item-list/item-list';
-import { ItemCounter } from './item-counter/item-counter';
-import { Lists } from './list/list';
+import {Component, OnInit } from '@angular/core';
+import {CommonModule} from '@angular/common'; // Importe CommonModule para *ngIf, *ngFor
+import {FormsModule} from '@angular/forms'; // Importe FormsModule para [(ngModel)]
+import {Item, List} from './models/item.model'; // Importa a interface
+import {v4 as uuidv4} from 'uuid'; // Para gerar IDs únicos (instalar se não tiver)
+import {Header} from './header/header';
+import {AddItem} from './add-item/add-item';
+import {ItemList} from './item-list/item-list';
+import {ItemCounter} from './item-counter/item-counter';
+import {Lists} from './list/list';
+import {StorageService} from './storage';
 
 @Component({
 	selector: 'app-root',
@@ -31,17 +32,17 @@ export class App implements OnInit {
 	selectedListIndex: number = 0;
 	listExample: List[] = [
 		{
-			label: 'Label',
+			label: 'Lista de Exemplo',
 			value: 'value',
 			items: [
 				{
 					id: uuidv4(),
-					description: 'Description',
+					description: 'Item 1',
 					completed: true,
 				},
 				{
 					id: uuidv4(),
-					description: 'Description 2',
+					description: 'Item 2',
 					completed: false,
 				},
 			],
@@ -56,29 +57,44 @@ export class App implements OnInit {
 
 	// selectedStatus: string | null = null;
 
+  constructor(private storageService: StorageService) {}
+
 	ngOnInit() {
-		// Modelo para testes
-		this.lists.push({
-			label: 'Eletrônicos',
-			value: 'electronics',
-			items: [
-				{ id: uuidv4(), description: 'PC', completed: true },
-				{ id: uuidv4(), description: 'Celular', completed: false },
-			],
-		});
-		this.lists.push({
-			label: 'Mercado',
-			value: 'shopping',
-			items: [
-				{ id: uuidv4(), description: 'Pão', completed: false },
-				{ id: uuidv4(), description: 'Leite', completed: false },
-			],
-		});
+    // Exemplo: carregar dados ao iniciar o componente
+    const loadedLists = this.loadData();
+
+    this.lists = loadedLists.length > 0 ? loadedLists : this.listExample;
+    if (loadedLists.length === 0) {
+      this.saveData(this.lists);
+    }
+    console.log('minimaLISTA iniciada com dados:', this.lists);
 	}
 
-	constructor() {}
+  saveData(listsToSave: List[]): void {
+    this.storageService.setItemLocalStorage('userData', listsToSave);
+    console.log('Dados salvos no localStorage!', listsToSave);
+  }
 
-	addOrUpdateItemInList(listValue: string, newItemDescription: string): void {
+  loadData(): List[] {
+    const userData = this.storageService.getItemLocalStorage('userData');
+    if (userData && Array.isArray(userData)) {
+      console.log('Dados carregados do localStorage:', userData);
+      return userData;
+    } else {
+      console.log('Nenhum dado encontrado ou formato inválido no localStorage para "userData".');
+      return [];
+    }
+  }
+
+  removeData(): void {
+    this.storageService.removeItemLocalStorage('userData');
+    this.lists = []; // Limpa as listas na memória também
+    this.saveData(this.lists); // Salva o estado vazio
+    console.log('Dados removidos do localStorage!');
+  }
+
+
+  addOrUpdateItemInList(listValue: string, newItemDescription: string): void {
 		// 1. Criar o novo item
 		const newItem: Item = {
 			id: uuidv4(), // Gera um novo ID para o item
@@ -89,12 +105,8 @@ export class App implements OnInit {
 		// 2. Mapear sobre o array principal 'lists'
 		this.lists = this.lists.map((list) => {
 			if (list.value === listValue) {
-				// Encontramos a lista correta
-				// 3. Criar uma NOVA referência para o array 'items' desta lista,
-				const updatedItems = [...list.items, newItem]; // <-- Novo array de items
-
-				// 4. Criar uma NOVA referência para a lista modificada,
-				return { ...list, items: updatedItems }; // Nova referência para a List
+        // Retorna uma nova referência para a lista com o array 'items' atualizado
+        return { ...list, items: [...list.items, newItem] }; // Nova referência para a List
 			}
 			// Se não for a lista que queremos modificar, retorna a lista original sem alterações.
 			return list;
@@ -117,6 +129,8 @@ export class App implements OnInit {
 			}
 			return list; // Retorna as outras listas sem alteração
 		});
+    // Salva o array 'lists' completo após a modificação
+    this.saveData(this.lists);
 	}
 
 	handleSelectedList(selectedList: string): void {
@@ -137,6 +151,7 @@ export class App implements OnInit {
 		} else {
 			this.lists = this.listExample;
 		}
+    this.saveData(this.lists); // Salva o novo estado completo
 	}
 
 	// Função chamada quando uma tarefa é removida pelo Item-list.component
@@ -150,5 +165,8 @@ export class App implements OnInit {
 			}
 			return list;
 		}); // Filtra o array, removendo a tarefa com o ID correspondente
+
+    // Salva o array 'lists' completo após a remoção
+    this.saveData(this.lists);
 	}
 }

@@ -1,10 +1,13 @@
-<div class='flex justify-center p-2 italic'>
-    <p *ngIf='itemsForCounter.length > 0 && quantityCompletedItems === 0' class='text-gray-400'>Nenhum item
-        marcado ainda.
+<div class='flex justify-center text-sm p-2 italic'>
+    <p *ngIf='itemsForCounter.length === 0 && quantityCompletedItems === 0' class='text-gray-400'>Adicione itens para começar a contagem.
+    </p>
+    <p *ngIf='itemsForCounter.length > 0 && !quantityCompletedItems' class='text-gray-400'>Nenhum item
+      marcado ainda.
+    </p>
     <p *ngIf='notCompleted && quantityCompletedItems > 0'>
         <span class='font-bold'>{{ quantityCompletedItems }}</span> de
         <span class='font-bold'>{{ itemsForCounter.length }}</span> itens concluídos.
     </p>
-    <p *ngIf='!notCompleted && itemsForCounter.length' class='text-gray-400'>Todos itens estão concluídos.
+    <p *ngIf='!notCompleted && itemsForCounter.length' class='text-gray-400'>Todos itens estão concluídos. <span class='font-bold text-black'>({{ quantityCompletedItems }})</span>
     </p>
 </div>

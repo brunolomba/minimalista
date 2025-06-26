@@ -1,4 +1,4 @@
-<ul *ngIf="items.length > 0 else noItems">
+<ul *ngIf="items.length > 0">
     <li *ngFor='let item of items' class='flex border-b border-gray-200 hover:bg-gray-100'>
         <div class='flex grow p-4 gap-2 items-center select-none cursor-pointer'>
             <span (click)='toggleComplete(item.id)' class='text-xl'>{{ item.completed ? '◈' : '◇'}}</span>
@@ -11,6 +11,3 @@
             class='px-4 text-red-400 font-bold cursor-pointer hover:bg-red-100'>✕</button>
     </li>
 </ul>
-<ng-template #noItems>
-    <p class="p-4 text-gray-400 italic">Nenhuma tarefa adicionada ainda!</p>
-</ng-template>
