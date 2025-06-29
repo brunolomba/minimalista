@@ -1,0 +1,9 @@
+<div class='{{ waterCounterData.isVisible ? "fixed bottom-0 right-0 m-4 p-4 bg-black text-white rounded" : "hidden"}}'>
+  <span class='p-2 text-2xl font-bold'>Water Bottle</span>
+  <div class='flex text-white items-center'>
+    <span (click)='decrement()' class='px-4 py-2 text-4xl font-black select-none'>-</span>
+    <p class='w-15 text-center text-4xl'>{{ waterCounterData.dayCounter }}</p>
+    <span (click)='increment()' class=' px-3 py-2 text-4xl font-black select-none'>+</span>
+  </div>
+</div>
+

@@ -9,3 +9,8 @@ export interface List {
 	value: string;
 	items: Item[];
 }
+
+export interface WaterCounterData {
+  dayCounter: number;
+  isVisible: boolean;
+}

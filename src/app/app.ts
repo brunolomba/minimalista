@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {CommonModule} from '@angular/common'; // Importe CommonModule para *ngIf, *ngFor
 import {FormsModule} from '@angular/forms'; // Importe FormsModule para [(ngModel)]
-import {Item, List} from './models/item.model'; // Importa a interface
+import {Item, List, WaterCounterData} from './models/item.model'; // Importa a interface
 import {v4 as uuidv4} from 'uuid'; // Para gerar IDs únicos (instalar se não tiver)
 import {Header} from './header/header';
 import {AddItem} from './add-item/add-item';
@@ -9,24 +9,26 @@ import {ItemList} from './item-list/item-list';
 import {ItemCounter} from './item-counter/item-counter';
 import {Lists} from './list/list';
 import {StorageService} from './storage';
+import {WaterCount} from './water-count/water-count';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
-	imports: [
-		CommonModule,
-		FormsModule,
-		Header,
-		Lists,
-		AddItem,
-		ItemList,
-		ItemCounter,
-	],
+  imports: [
+    CommonModule,
+    FormsModule,
+    Header,
+    Lists,
+    AddItem,
+    ItemList,
+    ItemCounter,
+    WaterCount,
+  ],
 	templateUrl: './app.html',
 	styleUrl: './app.css',
 })
 export class App implements OnInit {
-	protected title = 'minimaLISTA'; // Título da aplicação
+	protected title = 'minimalista'; // Título da aplicação
 
 	lists: List[] = [];
 	selectedListIndex: number = 0;
@@ -48,6 +50,12 @@ export class App implements OnInit {
 			],
 		},
 	];
+
+  // Water Counter
+  waterCounterData: WaterCounterData = {
+    dayCounter: 0,
+    isVisible: true,
+  }
 
 	// statuses = [
 	//   { label: 'Ativo', value: 'active' },

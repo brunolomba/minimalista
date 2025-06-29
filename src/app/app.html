@@ -1,6 +1,6 @@
 <app-header [lists]='lists' (newListUpdated)='handleListsUpdated($event)' (selectedList)='
-  handleSelectedList($event)'></app-header>
-<main>
+  handleSelectedList($event)' [waterCounterData]='waterCounterData'></app-header>
+<main class='border border-gray-300'>
   <app-list [title]='"Selecione uma Lista"' [lists]='lists' (selectedList)='handleSelectedList($event)'
     (listsUpdated)='handleListsUpdated($event)'></app-list>
   <!-- <app-list [title]=''Selecione o Status'' [options]='statuses' (optionSelected)='onStatusSelected($event)'></app-list> -->
@@ -14,3 +14,5 @@
 <footer>
   <app-item-counter [itemsForCounter]='lists[selectedListIndex].items'></app-item-counter>
 </footer>
+<app-water-count [waterCounterData]='waterCounterData'></app-water-count>
+
