@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751212504193,
+  "timestamp": 1751216615002,
   "index": "/minimalista/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/minimalista/favicon.ico",
         "/minimalista/index.html",
-        "/minimalista/main-A2XW66V3.js",
+        "/minimalista/main-5UKIUWDO.js",
         "/minimalista/manifest.webmanifest",
         "/minimalista/polyfills-B6TNHZQ6.js",
-        "/minimalista/styles-ZPZMXY6A.css"
+        "/minimalista/styles-AS7JOKHO.css"
       ],
       "patterns": []
     },
@@ -51,11 +51,11 @@
     "/minimalista/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/minimalista/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/minimalista/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/minimalista/index.html": "c47337ef8bd5790bd7f88120c24cbe4d92f860d2",
-    "/minimalista/main-A2XW66V3.js": "5765351fe91854ce9e2f1d9b7faa97020c8cdf49",
+    "/minimalista/index.html": "06eb7445020a35de7f09aadce5c51db8e0df0ac2",
+    "/minimalista/main-5UKIUWDO.js": "c16acf8c1036a316bdf3c6e33108482a094c4976",
     "/minimalista/manifest.webmanifest": "e78a96995f71f32b69e3351548b1ebb9348af8a3",
     "/minimalista/polyfills-B6TNHZQ6.js": "bf76ac291d7f51c1139b7edcf86b359a30c08c64",
-    "/minimalista/styles-ZPZMXY6A.css": "31bc1faa9c6911c30cc2eff3b094643279e4b9b2"
+    "/minimalista/styles-AS7JOKHO.css": "c204d77d3041f6d07b47910d144231c9c4d22c22"
   },
   "navigationUrls": [
     {
