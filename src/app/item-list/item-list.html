@@ -1,9 +1,9 @@
 <ul *ngIf="items.length > 0">
     <li *ngFor='let item of items' class='flex border-b border-gray-200 hover:bg-gray-50'>
-        <div class='flex grow p-4 gap-2 items-center select-none cursor-pointer'>
-            <span (click)='toggleComplete(item.id)' class='text-xl'>{{ item.completed ? '◈' : '◇'}}</span>
+        <div class='flex grow gap-2 items-center select-none cursor-pointer'>
+            <span (click)='toggleComplete(item.id)' class='text-xl p-4 pr-0'>{{ item.completed ? '◉' : '○'}}</span>
             <span (click)='toggleComplete(item.id)' [class.line-through]='item.completed'
-                class="{{item.completed ? 'flex flex-grow text-gray-400 line-through' : 'flex flex-grow'}}">
+                class='{{item.completed ? "text-gray-400 line-through" : ""}} flex-grow h-14 py-4'>
                 {{ item.description }}
             </span>
         </div>

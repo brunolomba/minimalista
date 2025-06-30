@@ -3,7 +3,7 @@
         <h1 class='grow inline p-4 text-xl'>
             minima<span class='font-bold'>LISTA</span>
         </h1>
-        <button (click)='toggleConfigOpen()' class='px-4 text-2xl'>◎</button>
+        <button (click)='toggleConfigOpen()' class='px-4 text-3xl cursor-pointer hover:bg-gray-800'>⊶</button>
         <button (click)='toggleInputAddList()'
             class='px-1 text-4xl text-white cursor-pointer hover:bg-gray-800'>﹢</button>
     </div>
@@ -11,27 +11,26 @@
         class='{{ isOpen
         ? "grow p-4 placeholder:text-gray-400 placeholder:text-sm outline-0" : "hidden" }}'
     >
-    <div class='{{ configOpen ? "w-full h-[calc(50vh)] bg-white" : "hidden"}}'>
-      <div class='w-full p-4 bg-gray-500'> Configurações</div>
-      <div class="flex items-center p-4">
-        <input
-          id='waterCounterCheckbox'
-          type='checkbox'
-          [(ngModel)]='waterCounterActived'
-          (change)='waterCounterCheckboxChange()'
-          class='peer hidden'  />
-        <label
-          for='waterCounterCheckbox'
-          class="relative flex items-center justify-center w-5 h-5 border-2 border-gray-400 rounded cursor-pointer
-           peer-checked:bg-black peer-checked:border-black"
-        >
-          <svg class="w-3 h-3 text-white hidden peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-          </svg>
-        </label>
-        <span class="ml-2 text-gray-700">water bottle counter</span>
+    <div class='{{ configOpen ? "w-full bg-white" : "hidden"}}'>
+      <div class='border border-gray-300 border-t-0 border-b-0'>
+        <div class='flex items-center p-4'>
+          <input
+            id='waterCounterCheckbox'
+            type='checkbox'
+            [(ngModel)]='waterCounterActived'
+            (change)='waterCounterCheckboxChange()'
+            class='peer hidden'  />
+          <label
+            for='waterCounterCheckbox'
+            class='relative flex items-center justify-center w-4 h-4 border-2 border-gray-300 rounded cursor-pointer
+          peer-checked:bg-black peer-checked:border-0'
+          >
+            <svg class="w-5 h-5 text-white peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </label>
+          <span class='{{ waterCounterActived ? "text-black" : "text-gray-400"}} ml-2'>Contador de garrafas de água</span>
+        </div>
       </div>
-
-      <div>teste</div>
     </div>
 </header>

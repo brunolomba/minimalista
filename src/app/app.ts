@@ -75,21 +75,17 @@ export class App implements OnInit {
     if (loadedLists.length === 0) {
       this.saveData(this.lists);
     }
-    console.log('minimaLISTA iniciada com dados:', this.lists);
 	}
 
   saveData(listsToSave: List[]): void {
     this.storageService.setItemLocalStorage('userData', listsToSave);
-    console.log('Dados salvos no localStorage!', listsToSave);
   }
 
   loadData(): List[] {
     const userData = this.storageService.getItemLocalStorage('userData');
     if (userData && Array.isArray(userData)) {
-      console.log('Dados carregados do localStorage:', userData);
       return userData;
     } else {
-      console.log('Nenhum dado encontrado ou formato inválido no localStorage para "userData".');
       return [];
     }
   }
@@ -98,7 +94,6 @@ export class App implements OnInit {
     this.storageService.removeItemLocalStorage('userData');
     this.lists = []; // Limpa as listas na memória também
     this.saveData(this.lists); // Salva o estado vazio
-    console.log('Dados removidos do localStorage!');
   }
 
 
@@ -119,6 +114,7 @@ export class App implements OnInit {
 			// Se não for a lista que queremos modificar, retorna a lista original sem alterações.
 			return list;
 		});
+    this.saveData(this.lists);
 	}
 
 	toggleItemCompletionInList(listValue: string, itemId: string): void {

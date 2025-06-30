@@ -41,7 +41,6 @@ export class Lists {
         const newlyAddedItem = currentLists[currentLists.length - 1];
         if (newlyAddedItem) {
           this.selectOption(newlyAddedItem);
-          console.log(`Novo item adicionado e selecionado: ${newlyAddedItem.label}`);
           return; // Sai da função após lidar com a adição
         }
       }
@@ -54,7 +53,6 @@ export class Lists {
         if (this.selectedOptionLabel !== this.title) { // Evita emitir se já estiver no estado padrão
           this.selectedOptionLabel = this.title;
           this.selectedList.emit('');
-          console.log('Lista vazia, seleção resetada.');
         }
         return; // Sai da função após lidar com lista vazia
       }
@@ -68,7 +66,6 @@ export class Lists {
       if (!isSelectedOptionStillPresent) {
         // Seleciona o primeiro item da lista atual se o selecionado sumiu
         this.selectOption(currentLists[0]);
-        console.log(`Opção selecionada removida, selecionando a primeira nova: ${currentLists[0].label}`);
       }
     }
   }

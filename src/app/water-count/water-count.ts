@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {StorageService} from '../storage';
 import {WaterCounterData} from '../models/item.model';
 
@@ -8,7 +8,7 @@ import {WaterCounterData} from '../models/item.model';
   templateUrl: './water-count.html',
   styleUrl: './water-count.css'
 })
-export class WaterCount implements OnInit {
+export class WaterCount {
   @Input() waterCounterData: WaterCounterData = {
     dayCounter: 0,
     isVisible: true,
@@ -16,23 +16,15 @@ export class WaterCount implements OnInit {
 
   constructor(private storageService: StorageService) { }
 
-  ngOnInit() {
-    this.waterCounterData.dayCounter = this.storageService.getItemLocalStorage('waterDayCounter');
-    if (!this.waterCounterData.dayCounter) {
-      this.waterCounterData.dayCounter = 0;
-    }
-    this.waterCounterData.isVisible = this.storageService.getItemLocalStorage('isVisible');
-  }
-
   decrement() {
     if (this.waterCounterData.dayCounter > 0) {
       this.waterCounterData.dayCounter = this.waterCounterData.dayCounter - 1;
-      this.storageService.setItemLocalStorage('waterDayCounter', this.waterCounterData.dayCounter);
+      this.storageService.setItemLocalStorage('hydrationData', {...this.waterCounterData, 'dayCounter': this.waterCounterData.dayCounter});
     }
   }
 
   increment() {
     this.waterCounterData.dayCounter = this.waterCounterData.dayCounter + 1;
-    this.storageService.setItemLocalStorage('waterDayCounter', this.waterCounterData.dayCounter);
+    this.storageService.setItemLocalStorage('hydrationData', { ...this.waterCounterData, 'dayCounter': this.waterCounterData.dayCounter});
   }
 }

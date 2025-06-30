@@ -1,5 +1,5 @@
 <section
-    class='flex focus-within:border focus-within:border-gray-300 bg-gray-200'>
+    class='flex bg-gray-200'>
     <div class='grow placeholder:text-gray-400 outline-0 overflow-hidden'>
         <button (click)=' toggleDropdown()'
             class='w-full flex justify-between items-center p-4 focus:outline-none transition-colors duration-200 text-lg font-semibold cursor-pointer'>
@@ -11,10 +11,11 @@
             <ul *ngIf='lists.length > 1 else noItens' class='list-none p-0 m-0'>
                 <li *ngFor='let list of lists' (click)='selectOption(list)'
                     class='{{ list.label != selectedOptionLabel
-                    ? "flex cursor-pointer bg-gray-100 border-b border-gray-200 hover:bg-gray-100 text-base" :
+                    ? "flex cursor-pointer bg-gray-50 border-b border-gray-200 hover:bg-gray-100 text-base" :
                     "hidden"}}'
                 >
-                    <span class='grow p-4'>{{ list.label }}</span>
+                    <span class='p-4 pr-2'>•</span>
+                    <span class='grow py-4'>{{ list.label }}</span>
                     <button (click)='removeList(list.value)'
                         class='px-4 text-red-400 font-bold cursor-pointer hover:bg-red-100'>✕</button>
                 </li>

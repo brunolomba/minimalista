@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Item } from '../models/item.model';
 
@@ -9,7 +9,7 @@ import { Item } from '../models/item.model';
   templateUrl: './item-counter.html',
   styleUrls: ['./item-counter.css']
 })
-export class ItemCounter implements OnInit, OnChanges {
+export class ItemCounter implements OnChanges {
   @Input() itemsForCounter: Item[] = [];
 
   quantityCompletedItems: number = 0;
@@ -17,11 +17,6 @@ export class ItemCounter implements OnInit, OnChanges {
   notCompleted:boolean = false;
 
   constructor() { }
-
-  // usado apenas para o console.log (remover futuramente)
-  ngOnInit(): void {
-    // this.updateCompletedItems();
-  }
 
   ngOnChanges(changes: SimpleChanges): void { // Use ngOnChanges para recontar quando o input 'tasks' muda
     if (changes['itemsForCounter']) {

@@ -29,8 +29,10 @@ export class Header implements OnInit {
 	constructor(private storageService: StorageService) {}
 
   ngOnInit() {
-    this.waterCounterData.isVisible = this.storageService.getItemLocalStorage('isVisible');
-    this.waterCounterActived = this.storageService.getItemLocalStorage('isVisible');
+    const loadedData: WaterCounterData = this.storageService.getItemLocalStorage('hydrationData');
+    this.waterCounterData.dayCounter = loadedData.dayCounter;
+    this.waterCounterData.isVisible = loadedData.isVisible;
+    this.waterCounterActived = loadedData.isVisible;
   }
 
 	toggleInputAddList(): void {
@@ -61,14 +63,8 @@ export class Header implements OnInit {
   }
 
   waterCounterCheckboxChange() {
-    if(this.waterCounterActived) {
-      this.storageService.setItemLocalStorage('isVisible', true);
-      this.waterCounterData.isVisible = true;
-      this.waterCounterActived = true;
-    } else {
-      this.storageService.setItemLocalStorage('isVisible', false);
-      this.waterCounterData.isVisible = false;
-      this.waterCounterActived = false;
-    }
+    let isVisible = this.waterCounterActived;
+    this.waterCounterData.isVisible = isVisible
+    this.storageService.setItemLocalStorage('hydrationData', { ...this.waterCounterData, 'isVisible': isVisible});
   }
 }
